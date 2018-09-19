@@ -8,17 +8,16 @@ output:
     toc_float: true
 ---
 # *problem 1* 
-## code chunk 1
+## problem description & code chunk 1
 Create a data frame comprised of:
 
-A random sample of size 10 from a uniform[0, 5] distribution
+A random sample of size 10 from a uniform[0, 5] distribution.
 
-A logical vector indicating whether elements of the sample are greater than 2
+A logical vector indicating whether elements of the sample are greater than 2.
 
-A (length-10) character vector
+A (length-10) character vector.
 
-A (length-10) factor vector
-
+A (length-10) factor vector.
 ```{r chunk1}
 library(tidyverse)
 dt_frame = tibble(
@@ -56,13 +55,48 @@ factor_to_num = as.numeric(dt_frame$factor_vector)
 logic_to_num = as.numeric(dt_frame$logical_vector) 
 
 ```
-This shows the variables cannot be converted from character to numberic. Except that, other kinds of conversion can be realized.
-
-
+This shows the variables cannot be converted from character to numberic. Except that, some other kinds of conversions(factor to numberic to character,logic to numberic, character to factor ) can be realized successfully.
 
 
 # *problem 2 *
+## problem description & code chunk 3
+Create a data frame comprised of:
+
+x: a random sample of size 1000 from a standard Normal distribution.
+
+y: a random sample of size 1000 from a standard Normal distribution.
+
+A logical vector indicating whether the x + y > 0.
+
+A numeric vector created by coercing the above logical vector.
+
+A factor vector created by coercing the above logical vector.
+
+```{r chunk3}
+library(tidyverse)
+dt_frame2 = tibble(
+  x = rnorm(1000, mean = 0, sd = 1) , 
+  y = rnorm(1000, mean = 0, sd = 1) ,
+  vc_logic = x + y > 0 ,
+  vc_num = as.numeric(vc_logic) ,
+  vc_factor = as.factor(vc_logic)
+)
+dt_frame2 = as.data.frame(dt_frame2)
+head(dt_frame2)
+
+```
+The size of the dataset is `r nrow(dt_frame2)` .
+
+The mean of x is `r mean(dt_frame2$x)` and the median of x is `r median(dt_frame2$x)` .
+
+The proportion of cases for which the logical vector is TRUE is `r  round(sum(dt_frame2$vc_num)/1000,3)`.
 
 
 
+
+
+
+Make a scatterplot of y vs x; color points using the logical variable (adding color = ... inside of aes in your ggplot code should help). Make a second and third scatterplot that color points using the numeric and factor variables, respectively, and comment on the color scales.
+
+Export your first scatterplot to your project directory using ggsave.
 

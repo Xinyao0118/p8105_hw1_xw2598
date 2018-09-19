@@ -228,13 +228,13 @@ div.tocify {
 
 <div id="problem-1" class="section level1">
 <h1><em>problem 1</em></h1>
-<div id="code-chunk-1" class="section level2">
-<h2>code chunk 1</h2>
+<div id="problem-description-code-chunk-1" class="section level2">
+<h2>problem description &amp; code chunk 1</h2>
 <p>Create a data frame comprised of:</p>
-<p>A random sample of size 10 from a uniform[0, 5] distribution</p>
-<p>A logical vector indicating whether elements of the sample are greater than 2</p>
-<p>A (length-10) character vector</p>
-<p>A (length-10) factor vector</p>
+<p>A random sample of size 10 from a uniform[0, 5] distribution.</p>
+<p>A logical vector indicating whether elements of the sample are greater than 2.</p>
+<p>A (length-10) character vector.</p>
+<p>A (length-10) factor vector.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <pre><code>## -- Attaching packages ----------------------------------------------------- tidyverse 1.2.1 --</code></pre>
 <pre><code>## &lt;U+221A&gt; ggplot2 3.0.0     &lt;U+221A&gt; purrr   0.2.5
@@ -253,21 +253,21 @@ div.tocify {
 dt_frame = as.data.frame(dt_frame)
 dt_frame</code></pre>
 <pre><code>##    random_sample logical_vector ch_vector factor_vector
-## 1      1.4643665          FALSE         a             a
-## 2      2.8012307           TRUE         b             b
-## 3      1.8083496          FALSE         c             c
-## 4      3.2707959           TRUE         d             d
-## 5      1.0513174          FALSE         e             e
-## 6      2.4127411           TRUE         f             f
-## 7      2.4212306           TRUE         g             g
-## 8      0.8020684          FALSE         h             h
-## 9      3.5975630           TRUE         i             i
-## 10     1.2723708          FALSE         j             j</code></pre>
+## 1      2.2089316           TRUE         a             a
+## 2      1.9410661          FALSE         b             b
+## 3      4.5249390           TRUE         c             c
+## 4      2.7650748           TRUE         d             d
+## 5      2.1889653           TRUE         e             e
+## 6      4.1144068           TRUE         f             f
+## 7      0.5449324          FALSE         g             g
+## 8      3.2404358           TRUE         h             h
+## 9      2.5636724           TRUE         i             i
+## 10     4.8270943           TRUE         j             j</code></pre>
 </div>
 <div id="the-mean-of-each-variable-in-the-dataframe" class="section level2">
 <h2>The mean of each variable in the dataframe</h2>
-<p>The mean of random sample is 2.0902034</p>
-<p>The mean of the logical vector is 0.5</p>
+<p>The mean of random sample is 2.8919518</p>
+<p>The mean of the logical vector is 0.8</p>
 <p>The mean of the character vector is NA</p>
 <p>The mean of the list of factor vector is NA</p>
 <p>The random sample and logical vector worked while character vector and factor vector didn`t work. According to the useage of mean(), the elements of the vector should be umeric/logical vectors and date, date-time and time interval objects.</p>
@@ -282,11 +282,42 @@ factor_to_chr = as.character(dt_frame$factor_vector)
 factor_to_num = as.numeric(dt_frame$factor_vector) 
 
 logic_to_num = as.numeric(dt_frame$logical_vector) </code></pre>
-<p>This shows the variables cannot be converted from character to numberic. Except that, other kinds of conversion can be realized.</p>
+<p>This shows the variables cannot be converted from character to numberic. Except that, some other kinds of conversions(factor to numberic to character,logic to numberic, character to factor ) can be realized successfully.</p>
 </div>
 </div>
 <div id="problem-2" class="section level1">
 <h1><em>problem 2 </em></h1>
+<div id="problem-description-code-chunk-3" class="section level2">
+<h2>problem description &amp; code chunk 3</h2>
+<p>Create a data frame comprised of:</p>
+<p>x: a random sample of size 1000 from a standard Normal distribution.</p>
+<p>y: a random sample of size 1000 from a standard Normal distribution.</p>
+<p>A logical vector indicating whether the x + y &gt; 0.</p>
+<p>A numeric vector created by coercing the above logical vector.</p>
+<p>A factor vector created by coercing the above logical vector.</p>
+<pre class="r"><code>library(tidyverse)
+dt_frame2 = tibble(
+  x = rnorm(1000, mean = 0, sd = 1) , 
+  y = rnorm(1000, mean = 0, sd = 1) ,
+  vc_logic = x + y &gt; 0 ,
+  vc_num = as.numeric(vc_logic) ,
+  vc_factor = as.factor(vc_logic)
+)
+dt_frame2 = as.data.frame(dt_frame2)
+head(dt_frame2)</code></pre>
+<pre><code>##            x           y vc_logic vc_num vc_factor
+## 1 -1.6402268 -0.76996427    FALSE      0     FALSE
+## 2  1.0634939  0.58224310     TRUE      1      TRUE
+## 3 -0.1896909 -0.01342542    FALSE      0     FALSE
+## 4  1.5040071 -0.18422835     TRUE      1      TRUE
+## 5  0.1331140 -1.16394616    FALSE      0     FALSE
+## 6 -0.2201603  0.71957627     TRUE      1      TRUE</code></pre>
+<p>The size of the dataset is 1000 .</p>
+<p>The mean of x is -0.0093006 and the median of x is -0.0341216 .</p>
+<p>The proportion of cases for which the logical vector is TRUE is 0.511.</p>
+<p>Make a scatterplot of y vs x; color points using the logical variable (adding color = … inside of aes in your ggplot code should help). Make a second and third scatterplot that color points using the numeric and factor variables, respectively, and comment on the color scales.</p>
+<p>Export your first scatterplot to your project directory using ggsave.</p>
+</div>
 </div>
 
 
