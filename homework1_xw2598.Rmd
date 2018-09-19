@@ -2,9 +2,13 @@
 title: "homework1_xw2598"
 author: "Xinyao WU"
 date: "2018/9/18"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_float: true
 ---
 # *problem 1* 
+## code chunk 1
 Create a data frame comprised of:
 
 A random sample of size 10 from a uniform[0, 5] distribution
@@ -15,7 +19,7 @@ A (length-10) character vector
 
 A (length-10) factor vector
 
-```{r}
+```{r chunk1}
 library(tidyverse)
 dt_frame = tibble(
   random_sample = runif(10,0,5) ,
@@ -27,4 +31,38 @@ dt_frame = as.data.frame(dt_frame)
 dt_frame
 
 ```
+##The mean of each variable in the dataframe
+
+The mean of random sample is `r mean(dt_frame$random_sample)`
+
+The mean of the  logical vector is `r mean(dt_frame$logical_vector)`
+
+The mean of the character vector is `r mean(dt_frame$ch_vector)`
+
+The mean of the list of factor vector is `r mean(dt_frame$factor_vector)`
+
+The random sample and logical vector worked while character vector and factor vector didn`t work. According to the useage of mean(), the elements of the vector should be umeric/logical vectors and date, date-time and time interval objects.
+
+## code chunk 2 
+
+```{r chunk2, results='hide'}
+
+chr_to_num = as.numeric(dt_frame$ch_vector) 
+chr_to_factor = as.factor(dt_frame$ch_vector) 
+
+factor_to_chr = as.character(dt_frame$factor_vector) 
+factor_to_num = as.numeric(dt_frame$factor_vector) 
+
+logic_to_num = as.numeric(dt_frame$logical_vector) 
+
+```
+This shows the variables cannot be converted from character to numberic. Except that, other kinds of conversion can be realized.
+
+
+
+
+# *problem 2 *
+
+
+
 
