@@ -8,16 +8,17 @@ output:
     toc_float: true
 ---
 # *problem 1* 
-## problem description & code chunk 1
-Create a data frame comprised of:
+##code chunk 1
 
-A random sample of size 10 from a uniform[0, 5] distribution.
+_Create a data frame comprised of:_
 
-A logical vector indicating whether elements of the sample are greater than 2.
+_A random sample of size 10 from a uniform[0, 5] distribution._
 
-A (length-10) character vector.
+_A logical vector indicating whether elements of the sample are greater than 2._
 
-A (length-10) factor vector.
+_A (length-10) character vector._
+
+_A (length-10) factor vector._
 ```{r chunk1}
 library(tidyverse)
 dt_frame = tibble(
@@ -27,24 +28,24 @@ dt_frame = tibble(
   factor_vector = as.factor(ch_vector) 
 )
 dt_frame = as.data.frame(dt_frame)
-dt_frame
+head(dt_frame)
 
 ```
 ##The mean of each variable in the dataframe
 
-The mean of random sample is `r mean(dt_frame$random_sample)`
+The mean of **random sample** is `r mean(dt_frame$random_sample)`
 
-The mean of the  logical vector is `r mean(dt_frame$logical_vector)`
+The mean of the **logical vector** is `r mean(dt_frame$logical_vector)`
 
-The mean of the character vector is `r mean(dt_frame$ch_vector)`
+The mean of the **character vector** is `r mean(dt_frame$ch_vector)`
 
-The mean of the list of factor vector is `r mean(dt_frame$factor_vector)`
+The mean of the **list of factor vector** is `r mean(dt_frame$factor_vector)`
 
-The random sample and logical vector worked while character vector and factor vector didn`t work. According to the useage of mean(), the elements of the vector should be umeric/logical vectors and date, date-time and time interval objects.
+**Explanation:**The random sample and logical vector worked while character vector and factor vector didn`t work. According to the useage of mean(), the elements of the vector should be umeric/logical vectors and date, date-time and time interval objects.
 
 ## code chunk 2 
 
-```{r chunk2, results='hide'}
+```{r chunk2, results='hide',warning=FALSE}
 
 chr_to_num = as.numeric(dt_frame$ch_vector) 
 chr_to_factor = as.factor(dt_frame$ch_vector) 
@@ -55,22 +56,22 @@ factor_to_num = as.numeric(dt_frame$factor_vector)
 logic_to_num = as.numeric(dt_frame$logical_vector) 
 
 ```
-This shows the variables cannot be converted from character to numberic. Except that, some other kinds of conversions(factor to numberic to character,logic to numberic, character to factor ) can be realized successfully.
+**Explanation：**This shows the variables cannot be converted from character to numberic. Except that, some other kinds of conversions(factor to numberic to character,logic to numberic, character to factor ) can be realized successfully.
 
 
 # *problem 2 *
-## problem description & code chunk 3
-Create a data frame comprised of:
+##code chunk 3
+*Create a data frame comprised of:*
 
-x: a random sample of size 1000 from a standard Normal distribution.
+*x: a random sample of size 1000 from a standard Normal distribution.*
 
-y: a random sample of size 1000 from a standard Normal distribution.
+*y: a random sample of size 1000 from a standard Normal distribution.*
 
-A logical vector indicating whether the x + y > 0.
+*A logical vector indicating whether the x + y > 0.*
 
-A numeric vector created by coercing the above logical vector.
+*A numeric vector created by coercing the above logical vector.*
 
-A factor vector created by coercing the above logical vector.
+*A factor vector created by coercing the above logical vector.*
 
 ```{r chunk3}
 library(tidyverse)
@@ -91,12 +92,17 @@ The mean of x is `r mean(dt_frame2$x)` and the median of x is `r median(dt_frame
 
 The proportion of cases for which the logical vector is TRUE is `r  round(sum(dt_frame2$vc_num)/1000,3)`.
 
+##scatterplot
+
+```{r}
+ggplot(dt_frame2, mapping = aes(x,y))+geom_point(data = dt_frame2, aes(x,y), col = ifelse(dt_frame2$vc_logic,"red","blue"), size =1 ) +labs(title = "scatterplot of y vs x ")
+ggsave("scatterplot_of_x_vs_y_colored_logic.pdf")
+
+ggplot(dt_frame2, mapping = aes(x,y))+geom_point(data = dt_frame2, aes(x,y), col = ifelse(dt_frame2$vc_num,"blue","green"), size =1 ) +labs(title = "scatterplot of y vs x ")
+
+ggplot(dt_frame2, mapping = aes(x,y))+geom_point(data = dt_frame2, aes(x,y), col = ifelse(dt_frame2$vc_factor == "TRUE","purple","violet"), size =1 ) +labs(title = "scatterplot of y vs x ")
+
+```
 
 
-
-
-
-Make a scatterplot of y vs x; color points using the logical variable (adding color = ... inside of aes in your ggplot code should help). Make a second and third scatterplot that color points using the numeric and factor variables, respectively, and comment on the color scales.
-
-Export your first scatterplot to your project directory using ggsave.
 
