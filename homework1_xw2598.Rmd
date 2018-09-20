@@ -41,7 +41,7 @@ The mean of the **character vector** is `r mean(dt_frame$ch_vector)`
 
 The mean of the **list of factor vector** is `r mean(dt_frame$factor_vector)`
 
-**Explanation:**The random sample and logical vector worked while character vector and factor vector didn`t work. According to the useage of mean(), the elements of the vector should be umeric/logical vectors and date, date-time and time interval objects.
+**Explanation:**When applying the function of mean(),the random sample and logical vector worked while character vector and factor vector didn`t work. That is because according to the useage of mean(), the elements of the vector should be umeric/logical vectors and date, date-time and time interval objects.
 
 ## code chunk 2 
 
@@ -58,7 +58,7 @@ factor_to_num = as.numeric(dt_frame$factor_vector)
 logic_to_num = as.numeric(dt_frame$logical_vector) 
 
 ```
-**Explanation：**This shows the variables cannot be converted from character to numberic. Except that, some other kinds of conversions(factor to numberic to character,logic to numberic, character to factor ) can be realized successfully.
+**Explanation**The warning (not shown above) means the variables cannot be converted from character to numberic. Except that, some other kinds of conversions(exp:factor to numberic to character,logic to numberic, character to factor ) can be realized successfully.
 
 
 # *problem 2 *
@@ -105,6 +105,11 @@ ggplot(dt_frame2, mapping = aes(x,y))+geom_point(data = dt_frame2, aes(x,y), col
 ggplot(dt_frame2, mapping = aes(x,y))+geom_point(data = dt_frame2, aes(x,y), col = ifelse(dt_frame2$vc_factor == "TRUE","purple","violet"), size =1 ) +labs(title = "scatterplot of y vs x ")
 
 ```
+
+
+
+
+
 
 
 
