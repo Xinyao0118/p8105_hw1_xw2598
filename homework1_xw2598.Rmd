@@ -101,21 +101,23 @@ The proportion of cases for which the logical vector is TRUE is `r  round(sum(dt
 #Create scarrerplot of y vs x and the point colored by logical variable
 ggplot(dt_frame2, mapping = aes(x, y))+
   geom_point(data = dt_frame2, aes(x, y), 
-             col = ifelse(dt_frame2$vc_logic, "red", "blue"), size =1 ) +
+             col = ifelse(dt_frame2$vc_logic, "red", "blue"), 
+             size =1 ) +
   labs(title = "scatterplot of y vs x ")
 ggsave("scatterplot_of_x_vs_y_colored_logic.pdf")
 
 #Create scarrerplot of y vs x and the point colored by numberic variable
 ggplot(dt_frame2, mapping = aes(x, y))+
-  geom_point(
-  data = dt_frame2, aes(x, y), 
-  col = ifelse(dt_frame2$vc_num, "blue", "green"), size =1 ) +
+  geom_point(data = dt_frame2, aes(x, y), 
+             col = ifelse(dt_frame2$vc_num, "blue", "green"), 
+             size =1 ) +
   labs(title = "scatterplot of y vs x ")
 
 #Create scarrerplot of y vs x and the point colored by factor variable
 ggplot(dt_frame2, mapping = aes(x, y))+
   geom_point(data = dt_frame2, aes(x, y),
-             col = ifelse(dt_frame2$vc_factor == "TRUE", "purple", "violet"), size =1 ) +
+             col = ifelse(dt_frame2$vc_factor == "TRUE", "purple", "violet"), 
+             size =1 ) +
   labs(title = "scatterplot of y vs x ")
 
 ```
