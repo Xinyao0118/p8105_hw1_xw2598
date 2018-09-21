@@ -9,20 +9,22 @@ output:
 ---
 # *problem 1* 
 ##code chunk 1
-
-```{r chunk1}
-library(tidyverse)
-  # Generate a data_frame included:
-  # 10 uniform random variables with values b/w 0 and 5 
-  # a logical vector indicating whether elements of random_sample are greater than 2 
-  # a (length-10) character vector 
-  # a (length-10) factor vector
-
-dt_frame = tibble(
+  Generate a data_frame included:
   
-  random_sample = runif(10,min = 0, max = 5) ,
+  10 uniform random variables with values b/w 0 and 5 
+  
+  A logical vector indicating whether elements of random_sample are greater than 2 
+  
+  A (length-10) character vector 
+  
+  A (length-10) factor vector
+```{r chunk1}
+
+library(tidyverse)
+dt_frame = tibble(
+  random_sample = runif(10, min = 0, max = 5) ,
   logical_vector = random_sample > 2 ,
-  ch_vector = c("a","b","c","d","e","f","g","h","i","j") ,
+  ch_vector = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j") ,
   factor_vector = as.factor(ch_vector) 
 )
 dt_frame = as.data.frame(dt_frame)
@@ -63,17 +65,19 @@ logic_to_num = as.numeric(dt_frame$logical_vector)
 
 # *problem 2 *
 ##code chunk 3
-
+  Create a data_frame included:
+  
+  Respectivgely generate x,y: a random sample of size 1000 from a standard Normal distribution.
+  
+  A logical vector indicating whether the x + y > 0.
+  
+  A numeric vector created by coercing the above logical vector.
+  
+  A factor vector created by coercing the above logical vector.
 
 ```{r chunk3}
-library(tidyverse)
-dt_frame2 = tibble(
-  #create a data_frame included:
-  #Respectivgely generate x,y: a random sample of size 1000 from a standard Normal distribution.
-  #A logical vector indicating whether the x + y > 0.
-  #A numeric vector created by coercing the above logical vector.
-  #A factor vector created by coercing the above logical vector.
   
+dt_frame2 = tibble(
   x = rnorm(1000, mean = 0, sd = 1) , 
   y = rnorm(1000, mean = 0, sd = 1) ,
   vc_logic = x + y > 0 ,
@@ -95,14 +99,24 @@ The proportion of cases for which the logical vector is TRUE is `r  round(sum(dt
 
 ```{r}
 #Create scarrerplot of y vs x and the point colored by logical variable
-ggplot(dt_frame2, mapping = aes(x,y))+geom_point(data = dt_frame2, aes(x,y), col = ifelse(dt_frame2$vc_logic,"red","blue"), size =1 ) +labs(title = "scatterplot of y vs x ")
+ggplot(dt_frame2, mapping = aes(x, y))+
+  geom_point(data = dt_frame2, aes(x, y), 
+             col = ifelse(dt_frame2$vc_logic, "red", "blue"), size =1 ) +
+  labs(title = "scatterplot of y vs x ")
 ggsave("scatterplot_of_x_vs_y_colored_logic.pdf")
 
 #Create scarrerplot of y vs x and the point colored by numberic variable
-ggplot(dt_frame2, mapping = aes(x,y))+geom_point(data = dt_frame2, aes(x,y), col = ifelse(dt_frame2$vc_num,"blue","green"), size =1 ) +labs(title = "scatterplot of y vs x ")
+ggplot(dt_frame2, mapping = aes(x, y))+
+  geom_point(
+  data = dt_frame2, aes(x, y), 
+  col = ifelse(dt_frame2$vc_num, "blue", "green"), size =1 ) +
+  labs(title = "scatterplot of y vs x ")
 
 #Create scarrerplot of y vs x and the point colored by factor variable
-ggplot(dt_frame2, mapping = aes(x,y))+geom_point(data = dt_frame2, aes(x,y), col = ifelse(dt_frame2$vc_factor == "TRUE","purple","violet"), size =1 ) +labs(title = "scatterplot of y vs x ")
+ggplot(dt_frame2, mapping = aes(x, y))+
+  geom_point(data = dt_frame2, aes(x, y),
+             col = ifelse(dt_frame2$vc_factor == "TRUE", "purple", "violet"), size =1 ) +
+  labs(title = "scatterplot of y vs x ")
 
 ```
 
