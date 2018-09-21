@@ -85,7 +85,7 @@ dt_frame2 = as.data.frame(dt_frame2)
 head(dt_frame2)
 
 ```
-The size of the dataset is `r nrow(dt_frame2)` .
+The size of the dataset is `r nrow(dt_frame2)` rows* `r ncol(dt_frame2)` columns  .
 
 The mean of x is `r mean(dt_frame2$x)` and the median of x is `r median(dt_frame2$x)` .
 
